@@ -351,6 +351,20 @@
       color: var(--accent-purple);
       opacity: 0;
       animation: fadeInBounce 0.6s ease-out 2s forwards;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      pointer-events: auto;
+    }
+
+    .theme-message:hover {
+      background: rgba(167, 139, 250, 0.2);
+      border-color: var(--accent-purple);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(167, 139, 250, 0.2);
+    }
+
+    .theme-message:active {
+      transform: translateY(0);
     }
 
     @keyframes fadeInBounce {
@@ -686,9 +700,9 @@
           </div>
 
           <!-- Theme Refresh Message -->
-          <div class="theme-message">
+          <div class="theme-message" id="theme-refresh-btn">
             <span class="theme-emoji">🎨</span>
-            <span class="theme-text">Not your vibe? Hit refresh for a new theme!</span>
+            <span class="theme-text">Not your vibe? Click here for a new theme!</span>
           </div>
         </div>
 
@@ -721,7 +735,7 @@
 
             <a href="https://github.com" target="_blank" class="project-item">
               <span class="project-permissions">drwxr-xr-x</span>
-              <span class="project-emoji">🔮</span>
+              <span class="project-emoji">��</span>
               <span class="project-name-term">project-gamma</span>
               <span class="project-desc-term">→ Data visualization suite</span>
               <span class="project-lang">[React]</span>
@@ -898,6 +912,8 @@
       }
     ];
 
+    let currentThemeIndex = -1;
+
     // Select random theme and apply it
     function applyRandomTheme() {
       const randomTheme = themes[Math.floor(Math.random() * themes.length)];
@@ -914,6 +930,17 @@
 
     // Apply theme immediately on page load
     applyRandomTheme();
+
+    // ===== THEME REFRESH BUTTON =====
+    document.getElementById('theme-refresh-btn').addEventListener('click', function() {
+      applyRandomTheme();
+      
+      // Add a little visual feedback
+      this.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        this.style.transform = '';
+      }, 100);
+    });
 
     // ===== MATRIX RAIN EFFECT =====
     const canvas = document.getElementById('matrix-canvas');
@@ -989,7 +1016,7 @@
     });
 
     // Hover effects for interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .terminal-button, .logo, .status-badge, .project-item');
+    const interactiveElements = document.querySelectorAll('a, button, .terminal-button, .logo, .status-badge, .project-item, #theme-refresh-btn');
     
     interactiveElements.forEach(element => {
       element.addEventListener('mouseenter', () => {
@@ -1048,7 +1075,7 @@
     console.log('%c│  Curious developer, we like that 😉 │', 'color: #00d9ff; font-weight: bold;');
     console.log('%c└─────────────────────────────────────┘', 'color: #00d9ff; font-weight: bold;');
     console.log('%cTip: Press any key to see magic ✨', 'color: #4ade80; font-style: italic;');
-    console.log('%cRefresh the page to see a different color theme! 🎨', 'color: #a78bfa; font-style: italic;');
+    console.log('%cClick the theme button to try different color schemes! 🎨', 'color: #a78bfa; font-style: italic;');
 
     // ===== HOVER EFFECTS =====
     const terminalButtons = document.querySelectorAll('.terminal-button');
