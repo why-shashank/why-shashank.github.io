@@ -9,9 +9,105 @@
   <link rel="apple-touch-icon" sizes="180x180" href="images/logo.png">
   <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
+    /* Color Scheme Options - Uncomment one to use */
+    
+    /* DEFAULT: Cyberpunk Cyan/Purple/Pink */
+    :root {
+      --bg-primary: #0a0e27;
+      --bg-secondary: #131730;
+      --text-primary: #e4e4e7;
+      --text-secondary: #a1a1aa;
+      --accent-cyan: #00d9ff;
+      --accent-purple: #a78bfa;
+      --accent-pink: #f472b6;
+      --accent-green: #4ade80;
+      --glass-bg: rgba(19, 23, 48, 0.4);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    /* OPTION 1: Matrix Green Theme */
+    /*
+    :root {
+      --bg-primary: #000000;
+      --bg-secondary: #0a0f0a;
+      --text-primary: #e4e4e7;
+      --text-secondary: #a1a1aa;
+      --accent-cyan: #00ff41;
+      --accent-purple: #39ff14;
+      --accent-pink: #8aff80;
+      --accent-green: #00ff88;
+      --glass-bg: rgba(10, 15, 10, 0.4);
+      --glass-border: rgba(0, 255, 65, 0.1);
+    }
+    */
+
+    /* OPTION 2: Sunset Orange/Red Theme */
+    /*
+    :root {
+      --bg-primary: #1a0f0f;
+      --bg-secondary: #2a1515;
+      --text-primary: #e4e4e7;
+      --text-secondary: #a1a1aa;
+      --accent-cyan: #ff6b35;
+      --accent-purple: #f7931e;
+      --accent-pink: #ff206e;
+      --accent-green: #fbff12;
+      --glass-bg: rgba(42, 21, 21, 0.4);
+      --glass-border: rgba(255, 107, 53, 0.1);
+    }
+    */
+
+    /* OPTION 3: Ice Blue Theme */
+    /*
+    :root {
+      --bg-primary: #0a1628;
+      --bg-secondary: #132440;
+      --text-primary: #e4e4e7;
+      --text-secondary: #a1a1aa;
+      --accent-cyan: #00d4ff;
+      --accent-purple: #5eb3f6;
+      --accent-pink: #a0e7ff;
+      --accent-green: #7dd3fc;
+      --glass-bg: rgba(19, 36, 64, 0.4);
+      --glass-border: rgba(0, 212, 255, 0.1);
+    }
+    */
+
+    /* OPTION 4: Purple Haze Theme */
+    /*
+    :root {
+      --bg-primary: #1a0a2e;
+      --bg-secondary: #270a45;
+      --text-primary: #e4e4e7;
+      --text-secondary: #a1a1aa;
+      --accent-cyan: #c77dff;
+      --accent-purple: #9d4edd;
+      --accent-pink: #e0aaff;
+      --accent-green: #7209b7;
+      --glass-bg: rgba(39, 10, 69, 0.4);
+      --glass-border: rgba(199, 125, 255, 0.1);
+    }
+    */
+
+    /* OPTION 5: Neon Teal/Magenta Theme */
+    /*
+    :root {
+      --bg-primary: #0d1b2a;
+      --bg-secondary: #1b263b;
+      --text-primary: #e4e4e7;
+      --text-secondary: #a1a1aa;
+      --accent-cyan: #06ffa5;
+      --accent-purple: #ff006e;
+      --accent-pink: #fb5607;
+      --accent-green: #06ffa5;
+      --glass-bg: rgba(27, 38, 59, 0.4);
+      --glass-border: rgba(6, 255, 165, 0.1);
+    }
+    */
+
     * {
       margin: 0;
       padding: 0;
@@ -19,126 +115,443 @@
     }
 
     body {
-      font-family: 'Roboto', sans-serif;
-      height: 100vh;
-      background: linear-gradient(135deg, #0d0f15 0%, #1b2735 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: white;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      background: var(--bg-primary);
+      color: var(--text-primary);
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden;
       cursor: none;
     }
 
-    .container {
-      text-align: center;
-      position: relative;
-      z-index: 2;
-      padding: 20px;
-      background-color: rgba(27, 39, 53, 0.8);
-      border-radius: 10px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-      max-width: 90%; /* Adjust max width for responsiveness */
+    /* Custom Cursor */
+    .cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--accent-cyan);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      mix-blend-mode: difference;
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
     }
 
-    h1 {
-      font-size: 3rem; /* Use responsive units if needed */
-      letter-spacing: 0.05rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-      color: #00eaff;
-      text-shadow: 0 0 15px rgba(0, 234, 255, 0.8);
-      transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    .cursor.cursor-hover {
+      width: 50px;
+      height: 50px;
+      background: rgba(0, 217, 255, 0.1);
+      border-color: var(--accent-purple);
+      box-shadow: 0 0 30px rgba(167, 139, 250, 0.8);
     }
 
-    h1:hover {
-      transform: scale(1.05);
-      color: #ff66ff;
-      text-shadow: 0 0 30px rgba(255, 102, 255, 0.8);
+    .cursor.cursor-click {
+      width: 15px;
+      height: 15px;
+      background: var(--accent-cyan);
     }
 
-    .tagline {
-      font-size: 1.5rem;
-      font-weight: 400;
-      color: #ffffff;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-      margin-bottom: 2rem;
-      transition: color 0.3s ease-in-out;
+    .cursor-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 0 10px var(--accent-cyan);
     }
 
-    .tagline:hover {
-      color: #ffcc00;
-      text-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
+    /* Cursor Trail */
+    .cursor-trail {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.5;
+      animation: trailFade 0.5s ease-out forwards;
     }
 
-    .logo {
-      width: 120px;
-      height: auto; /* Maintain aspect ratio */
-      margin-bottom: 2rem;
-      filter: drop-shadow(0 0 30px rgba(0, 234, 255, 1));
-      transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+    @keyframes trailFade {
+      to {
+        transform: scale(0);
+        opacity: 0;
+      }
     }
 
-    .logo:hover {
-      transform: scale(1.1);
-      filter: drop-shadow(0 0 40px rgba(0, 234, 255, 1));
+    /* Click Burst Particles */
+    .click-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9997;
+      width: 4px;
+      height: 4px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      animation: burstParticle 0.8s ease-out forwards;
     }
 
-    footer {
-      position: absolute;
-      bottom: 20px;
-      text-align: center;
-      width: 100%;
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.7);
-      z-index: 2;
-      transition: color 0.3s ease-in-out;
+    @keyframes burstParticle {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+      }
     }
 
-    footer:hover {
-      color: #ff66ff;
+    /* Cursor Glow Ring */
+    .cursor-glow {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9996;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.2) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: all 0.3s ease;
+      opacity: 0;
     }
 
-    .under-construction {
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-      color: #ffcc00;
-      text-shadow: 0 0 10px rgba(255, 204, 0, 0.9);
+    .cursor-glow.active {
+      opacity: 1;
     }
 
-    canvas {
-      position: absolute;
+    /* Matrix Rain Background */
+    #matrix-canvas {
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      z-index: 0;
+      opacity: 0.15;
+    }
+
+    /* Grid Pattern Overlay */
+    .grid-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(var(--glass-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+      background-size: 50px 50px;
       z-index: 1;
+      opacity: 0.3;
+      pointer-events: none;
     }
 
-    /* Media Queries for Responsive Design */
+    /* Main Container */
+    .container {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    /* Terminal Window */
+    .terminal-window {
+      width: 100%;
+      max-width: 800px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 
+        0 0 60px rgba(0, 217, 255, 0.1),
+        0 20px 50px rgba(0, 0, 0, 0.5);
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Terminal Header */
+    .terminal-header {
+      background: var(--bg-secondary);
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .terminal-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .terminal-button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      transition: transform 0.2s ease;
+    }
+
+    .terminal-button:hover {
+      transform: scale(1.2);
+    }
+
+    .terminal-button.close { background: #ff5f56; }
+    .terminal-button.minimize { background: #ffbd2e; }
+    .terminal-button.maximize { background: #27c93f; }
+
+    .terminal-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-left: auto;
+    }
+
+    /* Terminal Body */
+    .terminal-body {
+      padding: 2rem;
+      font-family: 'JetBrains Mono', monospace;
+      min-height: 400px;
+    }
+
+    /* Logo */
+    .logo-container {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .logo {
+      width: 100px;
+      height: auto;
+      filter: drop-shadow(0 0 20px var(--accent-cyan));
+      animation: float 3s ease-in-out infinite;
+      transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+      filter: drop-shadow(0 0 40px var(--accent-cyan));
+      transform: scale(1.1);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Terminal Prompt */
+    .prompt-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .prompt-symbol {
+      color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    .prompt-path {
+      color: var(--accent-purple);
+    }
+
+    .prompt-git {
+      color: var(--accent-pink);
+    }
+
+    /* Main Title */
+    .title-container {
+      margin-bottom: 2rem;
+    }
+
+    .title {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      animation: gradientShift 3s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Typing Effect */
+    .tagline {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+      overflow: hidden;
+      border-right: 2px solid var(--accent-cyan);
+      white-space: nowrap;
+      animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
+      display: inline-block;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    /* Command Output */
+    .output-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .output-line {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .output-line:nth-child(1) { animation-delay: 1s; }
+    .output-line:nth-child(2) { animation-delay: 1.2s; }
+    .output-line:nth-child(3) { animation-delay: 1.4s; }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .output-success {
+      color: var(--accent-green);
+    }
+
+    .output-info {
+      color: var(--accent-cyan);
+    }
+
+    /* Status Badge */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid var(--accent-green);
+      border-radius: 6px;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--accent-green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      animation: statusBlink 1.5s ease-in-out infinite;
+    }
+
+    @keyframes statusBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* Footer */
+    footer {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 10;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      padding: 0.5rem 1rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 6px;
+    }
+
+    footer a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--accent-purple);
+    }
+
+    /* Keyboard Press Effect */
+    .key-press-effect {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1000;
+      width: 100px;
+      height: 100px;
+      border: 2px solid var(--accent-cyan);
+      border-radius: 50%;
+      animation: ripple 1s ease-out;
+    }
+
+    @keyframes ripple {
+      from {
+        transform: scale(0);
+        opacity: 1;
+      }
+      to {
+        transform: scale(3);
+        opacity: 0;
+      }
+    }
+
+    /* Interactive Element Hover Effects */
+    .terminal-button:hover ~ * .cursor,
+    a:hover ~ * .cursor,
+    .logo:hover ~ * .cursor {
+      transform: scale(1.5);
+    }
+
+    /* Responsive Design */
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2.5rem;
+      .terminal-window {
+        max-width: 100%;
       }
 
-      .tagline {
-        font-size: 1.2rem;
-      }
-
-      .logo {
-        width: 100px; /* Adjust logo size for smaller screens */
-      }
-
-      footer {
-        font-size: 0.8rem; /* Smaller footer text */
-      }
-    }
-
-    @media (max-width: 480px) {
-      h1 {
+      .title {
         font-size: 2rem;
       }
 
@@ -146,128 +559,324 @@
         font-size: 1rem;
       }
 
+      .terminal-body {
+        padding: 1.5rem;
+      }
+
+      .cursor,
+      .cursor-dot,
+      .cursor-trail,
+      .cursor-glow {
+        display: none !important;
+      }
+
+      body {
+        cursor: default;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .title {
+        font-size: 1.5rem;
+      }
+
+      .tagline {
+        font-size: 0.875rem;
+      }
+
       .logo {
-        width: 80px; /* Further adjust logo size for very small screens */
+        width: 80px;
       }
     }
   </style>
 </head>
 <body>
-  <canvas id="particleCanvas"></canvas>
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-glow"></div>
+
+  <!-- Matrix Rain Canvas -->
+  <canvas id="matrix-canvas"></canvas>
+
+  <!-- Grid Overlay -->
+  <div class="grid-overlay"></div>
+
+  <!-- Main Container -->
   <div class="container">
-    <img src="images/logo.png" alt="The Neural Chain Logo" class="logo">
-    <h1>The Neural Chain</h1>
-    <p class="tagline">Tagline</p>
+    <div class="terminal-window">
+      <!-- Terminal Header -->
+      <div class="terminal-header">
+        <div class="terminal-buttons">
+          <div class="terminal-button close"></div>
+          <div class="terminal-button minimize"></div>
+          <div class="terminal-button maximize"></div>
+        </div>
+        <div class="terminal-title">the-neural-chain — zsh — 80×24</div>
+      </div>
+
+      <!-- Terminal Body -->
+      <div class="terminal-body">
+        <!-- Logo -->
+        <div class="logo-container">
+          <img src="images/logo.png" alt="The Neural Chain" class="logo">
+        </div>
+
+        <!-- Prompt Line -->
+        <div class="prompt-line">
+          <span class="prompt-symbol">➜</span>
+          <span class="prompt-path">~</span>
+          <span class="prompt-git">(main)</span>
+        </div>
+
+        <!-- Title -->
+        <div class="title-container">
+          <h1 class="title">The Neural Chain</h1>
+          <p class="tagline">$ Building the future, one node at a time_</p>
+        </div>
+
+        <!-- Output Section -->
+        <div class="output-section">
+          <div class="output-line output-success">✓ System initialized</div>
+          <div class="output-line output-info">→ Loading neural pathways...</div>
+          <div class="output-line output-success">✓ All systems operational</div>
+          
+          <div class="status-badge">
+            <div class="status-dot"></div>
+            <span>🚧 Under Construction</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- Footer -->
   <footer>
-    &copy; 2024 The Neural Chain. All rights reserved.
-    <div class="under-construction">
-      🚧 Under Construction 🚧 
-    </div>
+    © 2024 The Neural Chain • <a href="https://github.com" target="_blank">GitHub</a>
   </footer>
 
   <script>
-    const canvas = document.getElementById('particleCanvas');
+    // ===== MATRIX RAIN EFFECT =====
+    const canvas = document.getElementById('matrix-canvas');
     const ctx = canvas.getContext('2d');
-    let particles = [];
-    const particleCount = 150; // Increased particle count for a more dynamic effect
-    const maxDistance = 120; // Max distance for connection
-    let mouseX = -100;
-    let mouseY = -100;
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*(){}[]<>/\\|~`';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.random() * -100;
+    }
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(10, 14, 39, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#00d9ff';
+      ctx.font = `${fontSize}px JetBrains Mono`;
+
+      for (let i = 0; i < drops.length; i++) {
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 50);
 
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     });
 
-    window.addEventListener('mousemove', (e) => {
+    // ===== ENHANCED CUSTOM CURSOR =====
+    const cursor = document.querySelector('.cursor');
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorGlow = document.querySelector('.cursor-glow');
+    
+    let mouseX = 0;
+    let mouseY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
+    let dotX = 0;
+    let dotY = 0;
+
+    // Smooth cursor movement with easing
+    function animateCursor() {
+      const ease = 0.15;
+      const dotEase = 0.3;
+
+      cursorX += (mouseX - cursorX) * ease;
+      cursorY += (mouseY - cursorY) * ease;
+      dotX += (mouseX - dotX) * dotEase;
+      dotY += (mouseY - dotY) * dotEase;
+
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+      cursorDot.style.left = dotX + 'px';
+      cursorDot.style.top = dotY + 'px';
+      cursorGlow.style.left = cursorX + 'px';
+      cursorGlow.style.top = cursorY + 'px';
+
+      requestAnimationFrame(animateCursor);
+    }
+
+    animateCursor();
+
+    // Track mouse position
+    document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+
+      // Create cursor trail
+      if (Math.random() > 0.8) {
+        createTrail(e.clientX, e.clientY);
+      }
     });
 
-    class Particle {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.radius = Math.random() * 2 + 1; // Smaller particles
-        this.color = 'rgba(0, 234, 255, 0.8)'; // Uniform color for a cleaner look
-        this.speedX = (Math.random() - 0.5) * 0.5; // Reduced speed for smoother motion
-        this.speedY = (Math.random() - 0.5) * 0.5; // Reduced speed for smoother motion
-      }
+    // Create cursor trail effect
+    function createTrail(x, y) {
+      const trail = document.createElement('div');
+      trail.classList.add('cursor-trail');
+      trail.style.left = x + 'px';
+      trail.style.top = y + 'px';
+      document.body.appendChild(trail);
 
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-      }
-
-      update() {
-        // Move particle
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        // Bounce off edges
-        if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-        if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
-
-        // Move toward cursor on hover
-        const dx = this.x - mouseX;
-        const dy = this.y - mouseY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < 80) { // Closer interaction range
-          const angle = Math.atan2(dy, dx);
-          const force = (80 - distance) / 80; // Adjusted force for smoother movement
-          this.x -= Math.cos(angle) * force * 5; // Reduced movement force
-          this.y -= Math.sin(angle) * force * 5; // Reduced movement force
-        }
-      }
+      setTimeout(() => trail.remove(), 500);
     }
 
-    function createParticles() {
-      particles = [];
-      for (let i = 0; i < particleCount; i++) {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        particles.push(new Particle(x, y));
-      }
-    }
-
-    function drawParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((particle) => {
-        particle.update();
-        particle.draw();
+    // Hover effects for interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .terminal-button, .logo, .status-badge');
+    
+    interactiveElements.forEach(element => {
+      element.addEventListener('mouseenter', () => {
+        cursor.classList.add('cursor-hover');
+        cursorGlow.classList.add('active');
       });
-      connectParticles();
-      requestAnimationFrame(drawParticles);
-    }
 
-    function connectParticles() {
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          if (distance < maxDistance) {
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 234, 255, ${(1 - distance / maxDistance) * 0.5})`; // Color and transparency
-            ctx.lineWidth = 1; // Thinner lines for connections
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
-        }
+      element.addEventListener('mouseleave', () => {
+        cursor.classList.remove('cursor-hover');
+        cursorGlow.classList.remove('active');
+      });
+    });
+
+    // Click animation
+    document.addEventListener('mousedown', () => {
+      cursor.classList.add('cursor-click');
+    });
+
+    document.addEventListener('mouseup', () => {
+      cursor.classList.remove('cursor-click');
+    });
+
+    // Click burst effect
+    document.addEventListener('click', (e) => {
+      createClickBurst(e.clientX, e.clientY);
+    });
+
+    function createClickBurst(x, y) {
+      const particleCount = 12;
+      const colors = ['var(--accent-cyan)', 'var(--accent-purple)', 'var(--accent-pink)'];
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('click-particle');
+        
+        const angle = (Math.PI * 2 * i) / particleCount;
+        const velocity = 50 + Math.random() * 50;
+        const tx = Math.cos(angle) * velocity;
+        const ty = Math.sin(angle) * velocity;
+
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.setProperty('--tx', tx + 'px');
+        particle.style.setProperty('--ty', ty + 'px');
+
+        document.body.appendChild(particle);
+
+        setTimeout(() => particle.remove(), 800);
       }
     }
 
-    createParticles();
-    drawParticles();
+    // Magnetic effect for buttons
+    const magneticElements = document.querySelectorAll('.terminal-button');
+    
+    magneticElements.forEach(element => {
+      element.addEventListener('mousemove', (e) => {
+        const rect = element.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const deltaX = (e.clientX - centerX) * 0.3;
+        const deltaY = (e.clientY - centerY) * 0.3;
+
+        element.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.2)`;
+      });
+
+      element.addEventListener('mouseleave', () => {
+        element.style.transform = 'translate(0, 0) scale(1)';
+      });
+    });
+
+    // ===== KEYBOARD RIPPLE EFFECT =====
+    document.addEventListener('keydown', (e) => {
+      const ripple = document.createElement('div');
+      ripple.classList.add('key-press-effect');
+      ripple.style.left = (window.innerWidth / 2 - 50) + 'px';
+      ripple.style.top = (window.innerHeight / 2 - 50) + 'px';
+      document.body.appendChild(ripple);
+
+      setTimeout(() => {
+        ripple.remove();
+      }, 1000);
+    });
+
+    // ===== CONSOLE EASTER EGG =====
+    console.log('%c┌─────────────────────────────────────┐', 'color: #00d9ff; font-weight: bold;');
+    console.log('%c│  Welcome to The Neural Chain!      │', 'color: #00d9ff; font-weight: bold;');
+    console.log('%c│  Curious developer, we like that 😉 │', 'color: #00d9ff; font-weight: bold;');
+    console.log('%c└─────────────────────────────────────┘', 'color: #00d9ff; font-weight: bold;');
+    console.log('%cTip: Press any key to see magic ✨', 'color: #4ade80; font-style: italic;');
+
+    // ===== HOVER EFFECTS =====
+    const terminalButtons = document.querySelectorAll('.terminal-button');
+    terminalButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const ripple = document.createElement('div');
+        ripple.classList.add('key-press-effect');
+        ripple.style.left = (e.clientX - 50) + 'px';
+        ripple.style.top = (e.clientY - 50) + 'px';
+        document.body.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 1000);
+      });
+    });
+
+    // ===== TYPING ANIMATION FIX =====
+    const tagline = document.querySelector('.tagline');
+    const text = tagline.textContent;
+    tagline.textContent = '';
+    tagline.style.width = '0';
+
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        tagline.textContent += text.charAt(i);
+        tagline.style.width = 'auto';
+        i++;
+        setTimeout(typeWriter, 100);
+      }
+    }
+
+    setTimeout(typeWriter, 500);
   </script>
 </body>
 </html>
