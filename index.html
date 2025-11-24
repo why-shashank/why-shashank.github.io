@@ -43,7 +43,7 @@
       transition: background 0.5s ease;
     }
 
-    /* Custom Cursor */
+    /* Custom Cursor - Developer Style */
     .cursor {
       width: 20px;
       height: 20px;
@@ -52,96 +52,45 @@
       position: fixed;
       pointer-events: none;
       z-index: 9999;
-      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      mix-blend-mode: difference;
-      box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+      transition: all 0.2s ease;
+      opacity: 0.8;
     }
 
     .cursor.cursor-hover {
-      width: 50px;
-      height: 50px;
-      background: rgba(0, 217, 255, 0.1);
+      width: 40px;
+      height: 40px;
       border-color: var(--accent-purple);
-      box-shadow: 0 0 30px rgba(167, 139, 250, 0.8);
+      opacity: 1;
     }
 
     .cursor.cursor-click {
-      width: 15px;
-      height: 15px;
+      width: 16px;
+      height: 16px;
       background: var(--accent-cyan);
+      opacity: 0.6;
     }
 
     .cursor-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--accent-cyan);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 0 10px var(--accent-cyan);
-    }
-
-    /* Cursor Trail */
-    .cursor-trail {
-      width: 8px;
-      height: 8px;
-      background: var(--accent-cyan);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9998;
-      opacity: 0.5;
-      animation: trailFade 0.5s ease-out forwards;
-    }
-
-    @keyframes trailFade {
-      to {
-        transform: scale(0);
-        opacity: 0;
-      }
-    }
-
-    /* Click Burst Particles */
-    .click-particle {
-      position: fixed;
-      pointer-events: none;
-      z-index: 9997;
       width: 4px;
       height: 4px;
       background: var(--accent-cyan);
       border-radius: 50%;
-      animation: burstParticle 0.8s ease-out forwards;
-    }
-
-    @keyframes burstParticle {
-      0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translate(var(--tx), var(--ty)) scale(0);
-        opacity: 0;
-      }
-    }
-
-    /* Cursor Glow Ring */
-    .cursor-glow {
       position: fixed;
       pointer-events: none;
-      z-index: 9996;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 217, 255, 0.2) 0%, transparent 70%);
-      transform: translate(-50%, -50%);
-      transition: all 0.3s ease;
-      opacity: 0;
+      z-index: 10000;
+      transition: all 0.1s ease;
     }
 
-    .cursor-glow.active {
-      opacity: 1;
+    .cursor-trail {
+      display: none;
+    }
+
+    .click-particle {
+      display: none;
+    }
+
+    .cursor-glow {
+      display: none;
     }
 
     /* Matrix Rain Background */
@@ -248,19 +197,19 @@
 
     /* Terminal Body */
     .terminal-body {
-      padding: 2rem;
+      padding: 1.5rem;
       font-family: 'JetBrains Mono', monospace;
-      min-height: 400px;
+      min-height: 300px;
     }
 
     /* Logo */
     .logo-container {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1.25rem;
     }
 
     .logo {
-      width: 100px;
+      width: 70px;
       height: auto;
       filter: drop-shadow(0 0 20px var(--accent-cyan));
       animation: float 3s ease-in-out infinite;
@@ -282,8 +231,8 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      margin-bottom: 1.5rem;
-      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
     }
 
     .prompt-symbol {
@@ -301,11 +250,11 @@
 
     /* Main Title */
     .title-container {
-      margin-bottom: 2rem;
+      margin-bottom: 1.25rem;
     }
 
     .title {
-      font-size: 3rem;
+      font-size: 2.25rem;
       font-weight: 700;
       background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
       -webkit-background-clip: text;
@@ -323,7 +272,7 @@
 
     /* Typing Effect */
     .tagline {
-      font-size: 1.25rem;
+      font-size: 1rem;
       color: var(--text-secondary);
       font-family: 'JetBrains Mono', monospace;
       overflow: hidden;
@@ -344,15 +293,15 @@
 
     /* Command Output */
     .output-section {
-      margin-top: 2rem;
-      padding-top: 2rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
       border-top: 1px solid var(--glass-border);
     }
 
     .output-line {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--text-secondary);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
       opacity: 0;
       animation: fadeIn 0.5s ease-out forwards;
     }
@@ -377,15 +326,176 @@
     .status-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
       background: rgba(74, 222, 128, 0.1);
       border: 1px solid var(--accent-green);
       border-radius: 6px;
-      margin-top: 1.5rem;
-      font-size: 0.85rem;
+      margin-top: 1rem;
+      font-size: 0.75rem;
       color: var(--accent-green);
       animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* Theme Refresh Message */
+    .theme-message {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+      padding: 0.4rem 0.75rem;
+      background: rgba(167, 139, 250, 0.1);
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: var(--accent-purple);
+      opacity: 0;
+      animation: fadeInBounce 0.6s ease-out 2s forwards;
+    }
+
+    @keyframes fadeInBounce {
+      0% {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      60% {
+        opacity: 1;
+        transform: translateY(5px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .theme-emoji {
+      font-size: 0.9rem;
+      animation: rotate 3s ease-in-out infinite;
+    }
+
+    @keyframes rotate {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-10deg); }
+      75% { transform: rotate(10deg); }
+    }
+
+    .theme-text {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Terminal-Style Projects Section */
+    .projects-section {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .command-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out 1.6s forwards;
+    }
+
+    .command-text {
+      color: var(--text-primary);
+      margin-left: 0.5rem;
+    }
+
+    /* Project List - Terminal Style */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: auto auto 1fr auto auto;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+      font-size: 0.8rem;
+      text-decoration: none;
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeInSlide 0.5s ease-out forwards;
+      align-items: center;
+    }
+
+    .project-item:nth-child(1) { animation-delay: 1.8s; }
+    .project-item:nth-child(2) { animation-delay: 2s; }
+    .project-item:nth-child(3) { animation-delay: 2.2s; }
+
+    @keyframes fadeInSlide {
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .project-item:hover {
+      color: var(--text-primary);
+      background: rgba(0, 217, 255, 0.05);
+      padding-left: 0.5rem;
+      margin-left: -0.5rem;
+      border-left: 2px solid var(--accent-cyan);
+    }
+
+    .project-permissions {
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+    }
+
+    .project-emoji {
+      font-size: 1rem;
+    }
+
+    .project-name-term {
+      color: var(--accent-cyan);
+      font-weight: 500;
+    }
+
+    .project-item:hover .project-name-term {
+      color: var(--accent-purple);
+    }
+
+    .project-desc-term {
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+    }
+
+    .project-lang {
+      color: var(--accent-green);
+      font-size: 0.7rem;
+    }
+
+    /* Projects Summary */
+    .projects-summary {
+      display: flex;
+      gap: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.75rem;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out 2.4s forwards;
+    }
+
+    .summary-text {
+      color: var(--text-secondary);
+    }
+
+    .summary-hint {
+      color: var(--accent-purple);
+      font-style: italic;
     }
 
     @keyframes pulse {
@@ -482,6 +592,16 @@
         padding: 1.5rem;
       }
 
+      .project-item {
+        grid-template-columns: auto 1fr;
+        gap: 0.5rem;
+      }
+
+      .project-permissions,
+      .project-desc-term {
+        display: none;
+      }
+
       .cursor,
       .cursor-dot,
       .cursor-trail,
@@ -563,6 +683,55 @@
           <div class="status-badge">
             <div class="status-dot"></div>
             <span>🚧 Under Construction</span>
+          </div>
+
+          <!-- Theme Refresh Message -->
+          <div class="theme-message">
+            <span class="theme-emoji">🎨</span>
+            <span class="theme-text">Not your vibe? Hit refresh for a new theme!</span>
+          </div>
+        </div>
+
+        <!-- Projects Section - Terminal Style -->
+        <div class="projects-section">
+          <!-- Command Line -->
+          <div class="command-line">
+            <span class="prompt-symbol">➜</span>
+            <span class="prompt-path">~</span>
+            <span class="command-text">ls -la ./projects</span>
+          </div>
+
+          <!-- Project List -->
+          <div class="project-list">
+            <a href="https://github.com" target="_blank" class="project-item">
+              <span class="project-permissions">drwxr-xr-x</span>
+              <span class="project-emoji">🚀</span>
+              <span class="project-name-term">project-alpha</span>
+              <span class="project-desc-term">→ AI framework for neural networks</span>
+              <span class="project-lang">[Python]</span>
+            </a>
+
+            <a href="https://github.com" target="_blank" class="project-item">
+              <span class="project-permissions">drwxr-xr-x</span>
+              <span class="project-emoji">⚡</span>
+              <span class="project-name-term">project-beta</span>
+              <span class="project-desc-term">→ Distributed computing platform</span>
+              <span class="project-lang">[Go]</span>
+            </a>
+
+            <a href="https://github.com" target="_blank" class="project-item">
+              <span class="project-permissions">drwxr-xr-x</span>
+              <span class="project-emoji">🔮</span>
+              <span class="project-name-term">project-gamma</span>
+              <span class="project-desc-term">→ Data visualization suite</span>
+              <span class="project-lang">[React]</span>
+            </a>
+          </div>
+
+          <!-- Summary Line -->
+          <div class="projects-summary">
+            <span class="summary-text">3 repositories found</span>
+            <span class="summary-hint">→ click to explore</span>
           </div>
         </div>
       </div>
@@ -787,34 +956,26 @@
       canvas.height = window.innerHeight;
     });
 
-    // ===== ENHANCED CUSTOM CURSOR =====
+    // ===== DEVELOPER-STYLE CURSOR =====
     const cursor = document.querySelector('.cursor');
     const cursorDot = document.querySelector('.cursor-dot');
-    const cursorGlow = document.querySelector('.cursor-glow');
     
     let mouseX = 0;
     let mouseY = 0;
     let cursorX = 0;
     let cursorY = 0;
-    let dotX = 0;
-    let dotY = 0;
 
     // Smooth cursor movement with easing
     function animateCursor() {
       const ease = 0.15;
-      const dotEase = 0.3;
 
       cursorX += (mouseX - cursorX) * ease;
       cursorY += (mouseY - cursorY) * ease;
-      dotX += (mouseX - dotX) * dotEase;
-      dotY += (mouseY - dotY) * dotEase;
 
       cursor.style.left = cursorX + 'px';
       cursor.style.top = cursorY + 'px';
-      cursorDot.style.left = dotX + 'px';
-      cursorDot.style.top = dotY + 'px';
-      cursorGlow.style.left = cursorX + 'px';
-      cursorGlow.style.top = cursorY + 'px';
+      cursorDot.style.left = mouseX + 'px';
+      cursorDot.style.top = mouseY + 'px';
 
       requestAnimationFrame(animateCursor);
     }
@@ -825,36 +986,18 @@
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-
-      // Create cursor trail
-      if (Math.random() > 0.8) {
-        createTrail(e.clientX, e.clientY);
-      }
     });
 
-    // Create cursor trail effect
-    function createTrail(x, y) {
-      const trail = document.createElement('div');
-      trail.classList.add('cursor-trail');
-      trail.style.left = x + 'px';
-      trail.style.top = y + 'px';
-      document.body.appendChild(trail);
-
-      setTimeout(() => trail.remove(), 500);
-    }
-
     // Hover effects for interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .terminal-button, .logo, .status-badge');
+    const interactiveElements = document.querySelectorAll('a, button, .terminal-button, .logo, .status-badge, .project-item');
     
     interactiveElements.forEach(element => {
       element.addEventListener('mouseenter', () => {
         cursor.classList.add('cursor-hover');
-        cursorGlow.classList.add('active');
       });
 
       element.addEventListener('mouseleave', () => {
         cursor.classList.remove('cursor-hover');
-        cursorGlow.classList.remove('active');
       });
     });
 
@@ -866,36 +1009,6 @@
     document.addEventListener('mouseup', () => {
       cursor.classList.remove('cursor-click');
     });
-
-    // Click burst effect
-    document.addEventListener('click', (e) => {
-      createClickBurst(e.clientX, e.clientY);
-    });
-
-    function createClickBurst(x, y) {
-      const particleCount = 12;
-      const colors = ['var(--accent-cyan)', 'var(--accent-purple)', 'var(--accent-pink)'];
-
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('click-particle');
-        
-        const angle = (Math.PI * 2 * i) / particleCount;
-        const velocity = 50 + Math.random() * 50;
-        const tx = Math.cos(angle) * velocity;
-        const ty = Math.sin(angle) * velocity;
-
-        particle.style.left = x + 'px';
-        particle.style.top = y + 'px';
-        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-        particle.style.setProperty('--tx', tx + 'px');
-        particle.style.setProperty('--ty', ty + 'px');
-
-        document.body.appendChild(particle);
-
-        setTimeout(() => particle.remove(), 800);
-      }
-    }
 
     // Magnetic effect for buttons
     const magneticElements = document.querySelectorAll('.terminal-button');
@@ -970,3 +1083,4 @@
     setTimeout(typeWriter, 500);
   </script>
 </body>
+</html>
